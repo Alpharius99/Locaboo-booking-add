@@ -1,0 +1,116 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+---
+description: 
+globs: 
+alwaysApply: true
+---
+
+=======
+
+  You are an expert in Python, LocabooAPI, and scalable API development.
+  
+  Key Principles
+  - Write concise, technical responses with accurate Python examples.
+  - Use object oriented programming; use classes where possible.
+  - Prefer iteration and modularization over code duplication.
+  - Use descriptive variable names with auxiliary verbs (e.g., is_active, has_permission).
+  - Use lowercase with underscores for directories and files (e.g., routers/user_routes.py).
+  - Favor named exports for routes and utility functions.
+  - Use the Receive an Object, Return an Object (RORO) pattern.
+  
+  Python/LocabooAPI
+  - Use def for pure functions and async def for asynchronous operations.
+  - Use type hints for all function signatures. Prefer Pydantic models over raw dictionaries for input validation.
+  - File structure: exported router, sub-routes, utilities, static content, types (models, schemas).
+  - Avoid unnecessary curly braces in conditional statements.
+  - For single-line statements in conditionals, omit curly braces.
+  - Use concise, one-line syntax for simple conditional statements (e.g., if condition: do_something()).
+  
+  Error Handling and Validation
+  - Prioritize error handling and edge cases:
+    - Handle errors and edge cases at the beginning of functions.
+    - Use early returns for error conditions to avoid deeply nested if statements.
+    - Place the happy path last in the function for improved readability.
+    - Avoid unnecessary else statements; use the if-return pattern instead.
+    - Use guard clauses to handle preconditions and invalid states early.
+    - Implement proper error logging and user-friendly error messages.
+    - Use custom error types or error factories for consistent error handling.
+  
+  Dependencies
+  - LocabooAPI
+  
+  Performance Optimization
+  - Minimize blocking I/O operations; use asynchronous operations for all database calls and external API requests.
+  - Implement caching for static and frequently accessed data using tools like Redis or in-memory stores.
+  - Optimize data serialization and deserialization with Pydantic.
+  - Use lazy loading techniques for large datasets and substantial API responses.
+  
+  Key Conventions
+  1. Rely on FastAPI’s dependency injection system for managing state and shared resources.
+  2. Prioritize API performance metrics (response time, latency, throughput).
+  3. Limit blocking operations in routes:
+     - Favor asynchronous and non-blocking flows.
+     - Use dedicated async functions for database and external API operations.
+     - Structure routes and dependencies clearly to optimize readability and maintainability.
+  4. Always update the docs.
+  5. Prefer configurability and use the config.json to store configurable values.
+  6. As Locaboo API referense use https://app.locaboo.com/api-reference.html.
+  7. Respect the ID's in the config.json and don't change them.
+  8. Prefer small files/classes.
+  9. If some code is changed, try to avoid code redundancies.
+ 10. The secret key is a query parameter.
+ 11. If the debug flag is set, no writing calls should be made. Any reading calls are allowed.
+ 12. Use Conventional Commit format for composing the commit messages
+  
+## Format for the customer.json
+
+```json
+The format of the customer.json is like:
+    {
+      "id": 104842,
+      "email": "abc@abc.de",
+      "company_name": "ABC e.V.",
+      "first_name": "Bla",
+      "last_name": "Blub",
+      "show_name": "ABC e.V.",
+      "created": "2022-05-20T16:33:12+02:00",
+      "customer_id": 0,
+      "customer_number": 100002,
+      "customer_number_prefix": "",
+      "street": "",
+      "zip": "",
+      "city": "",
+      "phone": "",
+      "noletter": "0",
+      "color": "#00b050",
+      "salutation": "-1",
+      "country": "",
+      "house_number": "64",
+      "customer_account_number": "",
+      "salutation_title": "-2",
+      "tags": [],
+      "groups": [
+        {
+          "id": 3094989,
+          "customer_id": 104842,
+          "key": "customer_group_id",
+          "value": "3247",
+          "group": {
+            "id": 3247,
+            "user_id": 98165,
+            "name": "XYZ",
+            "description": "",
+            "public_group": 0,
+            "defult_group": 0
+          }
+        }
+      ],
+      "website": null,
+      "sap_mdat_exported": null,
+      "sap_mdat_modified": null
+    },
+```
