@@ -14,7 +14,7 @@ The tool processes a 2D matrix representation of bookings and creates correspond
   - Columns represent weekdays (Monday through Sunday)
   - The weekday names are set in the rows 5 and 6 (merged cells)
   - The weekday names are given in German starting with Monday (Montag)
-  - The weekday names are mapped to integer values (0 = Monday, 6 = Sunday)
+  - The weekday names are mapped to three-letter code ("mon" = Monday, 6 = Sunday)
   - Each weekday has two columns (representing two Locaboo resources)
   - The resource names are set in rows 3 and 4 (merged cells)
   - The resource names are mapped to their ID's (integer values)
@@ -45,23 +45,66 @@ The tool processes a 2D matrix representation of bookings and creates correspond
     - weekday ID
     - start time
     - end time
+- The class logs all detection, parsing and sorting activities
+- All errors and exceptions are handled by the exception handling class
 
 ### Booking Creation
 - The booking creation functionality is encapsulated in one class
 - The booking creation class has a public factory method to create a dictionary to fill with all relevant booking data (booking container)
 - The outcome booking container contains following keys with values:
-  - "booking_mode" = direct_booking
+  - "booking_mode" = "direct_booking" (constant value)
   - "title" = description
   - "customer_id" = customer ID
-  - "recurring" = 1
+  - "recurring" = 1 (constant value)
   - "date_from" = start day from the configuration (format YYYY-MM-DD)
   - "date_to" = end day from the configuration (format YYYY-MM-DD)
-  - 
-  - resource ID
-  - weekday ID
-  - start time
-  - end time
-  - start date
+  - "recurrence_type" = "week" (constant value)
+  - "weekly_type_select" = "week" (constant value)
+  - an array named "weekly_recurrence" with the following key/value pairs
+    - "day" = weekday code ("mon" for Monday)
+    - "from" = start day ("HH:mm", 24h)
+    - "to" = start day ("HH:mm", 24h)
+  - "internal_comments" = "Imported at <timestamp>, cells <cells in the Excel sheet>" (format HH:mm:ss DD:MM:YYYY)
+- The class logs the resulted dictionary
+- All errors and exceptions are handled by the exception handling class
+
+### Booking Adding to Locaboo
+- Use Locaboo API endpoint https://app.locaboo.com/api/v2/booking_add
+- The API secret key is a query parameter
+- The API functionality is encapsulated in one class
+- The class offers a public method to add a booking over API
+- This public method accepts a booking dictionary, a secret key
+- The class logs all calls and responses
+- All errors and exceptions are handled by the exception handling class
+- A development mode activated by a flag is provided. If this mode is active, no API call is made. The request is logged.
+
+### Logging
+- Configured the logging
+  - Terminal with INFO level
+  - File with DEBUG level
+  - File is rewritten with every start
+  - Every log entry contains
+    - time stamp (YYYY-MM-DD HH:mm:ss)
+    - log level
+    - message
+- The logging functionality is provided for all classes in the project
+- The logging functionality is encapsulated in a class
+  - time stamp (YYYY-MM-DD HH:mm:ss)
+  - log level (ERROR)
+  - calling class
+  - calling method
+  - line in the code
+  - message
+
+### Exception handling
+- Provide general exception handling for all classes in project
+- The error message is written to the log using
+
+### Controller
+- The central script to control all functionality
+- Use all other classes by instantiating and calling their methods
+- Logging of all activities
+- All errors and exceptions are handled by the exception handling class
 
 ## Technical Requirements
 
@@ -73,7 +116,7 @@ The tool processes a 2D matrix representation of bookings and creates correspond
 
 ### Locaboo Integration
 - Integration with Locaboo API
-- Authentication handling
+- Authentication handling with the API key
 - Booking creation with proper error handling
 - Support for multiple resources per weekday
 - Validation of booking parameters before creation
@@ -83,47 +126,6 @@ The tool processes a 2D matrix representation of bookings and creates correspond
 - Resource ID mapping for each column
 - Time slot configuration (start time, interval duration)
 - Error handling and logging configuration
-
-## User Interface
-
-### Input
-- Excel file upload interface
-- Configuration panel for:
-  - Customer color mappings
-  - Resource assignments
-  - Time slot settings
-  - API credentials
-
-### Output
-- Processing status display
-- Success/failure notifications
-- Booking summary report
-- Error log display
-
-## Error Handling
-- Invalid Excel format detection
-- Missing or incorrect color mappings
-- API communication errors
-- Booking validation errors
-- Resource availability conflicts
-
-## Security Requirements
-- Secure storage of API credentials
-- Input validation
-- Error logging without sensitive data exposure
-
-## Performance Requirements
-- Support for processing large Excel files
-- Efficient handling of multiple bookings
-- Reasonable processing time for standard weekly schedules
-
-## Future Enhancements
-- Support for recurring bookings
-- Batch processing of multiple files
-- Custom time slot configurations
-- Advanced booking validation rules
-- Booking modification capabilities
-- Export functionality for processed data
 
 ## Dependencies
 - Python 3.x
@@ -135,8 +137,8 @@ The tool processes a 2D matrix representation of bookings and creates correspond
 ## Success Criteria
 1. Accurate booking creation from Excel data
 2. Proper handling of multi-cell bookings
-3. Correct customer assignment based on colors
+3. Correct customer assignment based on colors and borderlines
 4. Successful resource allocation
 5. Comprehensive error reporting
-6. User-friendly interface
+6. User-friendly using
 7. Reliable performance with standard weekly schedules 
