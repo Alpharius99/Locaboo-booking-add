@@ -4,7 +4,7 @@
 **Duration**: 4-6 weeks  
 **Start Date**: TBD  
 **End Date**: TBD  
-**Team Size**: 1-2 developers  
+**Team Size**: 1 developer
 
 ## Phase 1: Project Foundation & Setup
 **Duration**: 3-5 days  
@@ -34,7 +34,7 @@
 - [ ] **Implement exception handling framework**
   - Create custom exception classes
   - Implement global exception handler
-  - Integrate with logging system
+  - Integrate with the logging system
   - **Estimated**: 1 day
 
 - [ ] **Setup development dependencies**
@@ -89,7 +89,7 @@
   - **Estimated**: 1.5 days
 
 - [ ] **Booking detection and grouping**
-  - Detect adjacent cells with same color
+  - Detect adjacent cells with the same color
   - Group cells into bookings using borderlines
   - Calculate booking duration (15min × cell count)
   - Combine text from multiple cells
@@ -148,7 +148,7 @@
 
 ## Phase 4: Locaboo API Integration
 **Duration**: 4-5 days  
-**Goal**: Implement API communication with Locaboo system
+**Goal**: Implement API communication with the Locaboo system
 
 ### Tasks
 - [ ] **API client class foundation**
@@ -178,7 +178,7 @@
 - [ ] **Error handling and retry logic**
   - Handle API communication errors
   - Implement response error parsing
-  - Add retry mechanism for failed requests
+  - Add a retry mechanism for failed requests
   - **Estimated**: 1 day
 
 ### Milestone 4: API Integration Complete ✅
@@ -192,11 +192,11 @@
 
 ## Phase 5: Controller and Integration
 **Duration**: 2-3 days  
-**Goal**: Create main controller and integrate all components
+**Goal**: Create the main controller and integrate all components
 
 ### Tasks
 - [ ] **Main controller implementation**
-  - Create central control script
+  - Create the central control script
   - Integrate all component classes
   - Handle configuration loading
   - **Estimated**: 1 day
